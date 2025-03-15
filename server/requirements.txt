@@ -11,8 +11,8 @@ graphql-relay==2.0.1
 graphql-server-core==1.2.0
 importlib_metadata==8.2.0
 itsdangerous==2.2.0
-Jinja2==3.1.4
-MarkupSafe==2.1.5
+Jinja2==3.1.6
+MarkupSafe==3.0.2
 promise==2.3
 pytz==2024.1
 Rx==1.6.3

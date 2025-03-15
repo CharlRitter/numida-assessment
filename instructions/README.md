@@ -58,7 +58,7 @@ Please refer to the server [README](server/README.md) file in the root directory
 
 2. **GraphQL Data Refactor & Fetching**:
    - Update GraphQL Schema to expose loan_payments
-     - (Note the GraphIQL tool can be useful for debugging by visiting localhost:2024/grqphql in your browser)
+     - (Note the GraphIQL tool can be useful for debugging by visiting localhost:2024/graphql in your browser)
    - Consume the updated graphql schema from the web app
 
 3. **Web App Fetch & Render**:
@@ -67,9 +67,8 @@ Please refer to the server [README](server/README.md) file in the root directory
    - Note that `npm run compile` will update the generated typescript types within the `__generated__` folder.
 
 4. **Problem Solving**:
-
     - Problem Statement:
-        - A borrower repays a loan in monthly installments. Each installment falls into one of three categories:
+        - A borrower repays a loan in monthly instalments. Each instalment falls into one of three categories:
             - `"On Time"` → If the payment is made within 5 days of the due date. (GREEN)
             - `"Late"` → If the payment is made between 6 and 30 days after the due date. (ORANGE)
             - `"Defaulted"` → If the payment is more than 30 days late. (RED)

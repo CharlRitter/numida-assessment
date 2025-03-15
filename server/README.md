@@ -1,4 +1,4 @@
-![Numida](../fse-assessment-instructions/logo.numida.png)
+![Numida](../instructions/logo.numida.png)
 
 # SERVER SETUP INSTRUCTIONS
 

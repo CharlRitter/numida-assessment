@@ -1,4 +1,4 @@
-aniso8601==7.0.0
+aniso8601==10.0.0
 blinker==1.8.2
 click==8.1.7
 Flask==3.0.3

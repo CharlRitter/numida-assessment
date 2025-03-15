@@ -1,4 +1,4 @@
-import './App.css'
+import '@/App.scss'
 
 const AddNewPayment = () => {
     return (
@@ -9,12 +9,12 @@ const AddNewPayment = () => {
                 }}
             >
                 <p>
-                    <label>Payment Loan Id</label>
+                    <label className='mr-1'>Payment Loan Id</label>
                     <input name="loan-id" onChange={() => {}} />
                 </p>
 
                 <p>
-                    <label>Payment Amount</label>
+                    <label className='mr-1'>Payment Amount</label>
                     <input
                         name="payment-amount"
                         type="number"

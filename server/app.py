@@ -1,8 +1,9 @@
 import datetime
-from flask import Flask
-from flask_graphql import GraphQLView
-from flask_cors import CORS
+
 import graphene
+from flask import Flask
+from flask_cors import CORS
+from flask_graphql import GraphQLView
 
 app = Flask(__name__)
 CORS(app)
@@ -62,9 +63,7 @@ class Query(graphene.ObjectType):
 schema = graphene.Schema(query=Query)
 
 
-app.add_url_rule(
-    "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema, graphiql=True)
-)
+app.add_url_rule("/graphql", view_func=GraphQLView.as_view("graphql", schema=schema, graphiql=True))
 
 
 @app.route("/")

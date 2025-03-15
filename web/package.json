@@ -1,35 +1,59 @@
 {
   "name": "web",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "compile": "graphql-codegen",
+    "dev": "vite",
+    "lint": "eslint src && stylelint 'src/**/*.scss'",
+    "lint-fix": "npm run lint-fix-ts && npm run lint-fix-styling",
+    "lint-fix-styling": "stylelint 'src/**/*.scss' --fix --allow-empty-input",
+    "lint-fix-ts": "eslint src --fix",
     "preview": "vite preview",
-    "compile": "graphql-codegen"
+    "tailwind": "tailwindcss build -c tailwind.config.ts -o src/tailwind.css",
+    "test": "playwright test",
+    "test-report": "playwright show-report",
+    "test-ui": "playwright test --ui"
+  },
+  "eslintConfig": {
+    "root": true
   },
   "dependencies": {
-    "@apollo/client": "^3.13.3",
+    "@apollo/client": "^3.13.4",
     "graphql": "^16.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^9.22.0",
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/client-preset": "^4.7.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^3.9.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "stylelint": "^16.16.0",
+    "stylelint-config-sass-guidelines": "^12.1.0",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-scss": "^6.11.1",
+    "tailwindcss": "^4.0.14",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.2.2"
   }
 }

@@ -1,0 +1,17 @@
+{
+  "ignoreUnknownRules": true,
+  "defaultSeverity": "error",
+  "extends": ["stylelint-config-standard", "stylelint-config-sass-guidelines"],
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "no-empty-source": null,
+    "declaration-empty-line-before": null,
+    "value-keyword-case": null,
+    "selector-pseudo-class-no-unknown": null,
+    "selector-type-no-unknown": null,
+    "selector-max-id": 0,
+    "no-descending-specificity": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "web/**/*.{js,jsx,ts,tsx}": [
+      "sh -c 'cd web && npm run lint-fix-ts --no-warn-ignored'"
+    ],
+    "web/**/*.{scss,css}": [
+      "sh -c 'cd web && npm run lint-fix-styling'"
+    ],
+    "server/**/*.py": [
+      "sh -c 'cd server && make lint-fix'"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0"
+  }
+}

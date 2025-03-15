@@ -160,7 +160,7 @@ def add_payment():
 
     new_payment = {
         "id": new_id,
-        "loan_id": data["loan_id"],
+        "loan_id": int(data["loan_id"]),
         "payment_date": payment_date,
     }
     loan_payments.append(new_payment)

@@ -6,6 +6,8 @@ Tested on:
 
 ## Description
 
+This project is a full-stack assessment application for Numida. The server, built in Python using Flask and GraphQL, manages loan and payment data. The web client, powered by Vite, React, and Tailwind CSS, provides an interactive UI to view existing loans and add new payments. The system demonstrates integration between REST endpoints and GraphQL queries to maintain updated front-end state. It also includes testing using Playwright & PyTest, comprehensive linting, and CI/CD integration ideas.
+
 ## Setup
 
 1. Clone the repository:
@@ -133,13 +135,29 @@ OR
 
 ## ToDo Items
 ### Server
- - Build an image with semantic versioning on CICD.
- - Build and upload a docker image on CICD.
- - Better structuring of the file structure
+- **CICD Enhancements:**
+  - Build an image with semantic versioning on CICD.
+  - Automate build and upload of the Docker image onto CICD.
+- **Architecture & Performance:**
+  - Improve file and module organization.
+  - Implement pagination and filtering for large datasets.
+  - Optimize query performance with proper indexing and caching.
+- **Testing & Logging:**
+  - Expand integration and unit tests.
+  - Enhance logging and error handling to aid in troubleshooting.
 
 ### Web Client
- - Use a component library, like AntD.
- - Add light & dark mode.
- - Use theming tokens (CSS vars) to dictate theme
- - Add redux to manage global state for api calls
- - Better structuring of the file structure
+- **UI/UX Improvements:**
+  - Integrate a component library (e.g., Ant Design) for more consistent UI elements.
+  - Implement responsive design improvements to better support mobile and tablet devices.
+  - Add light/dark mode toggling and theming tokens (using CSS Variables) for a customizable appearance.
+- **State Management:**
+  - Integrate Redux (or a similar state management library) to better manage global state and API call status.
+- **Feature Enhancements:**
+  - Implement pagination and filtering of loan records.
+  - Improve accessibility (a11y) across the application.
+  - Expand end-to-end test coverage and add visual regression tests.
+- **Code Organization & Testing:**
+  - Refactor the file structure for improved maintainability.
+  - Improve unit test coverage across components.
+  - Integrate additional performance metrics and error monitoring tools.

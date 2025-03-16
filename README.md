@@ -1,12 +1,16 @@
 # Numida Assessment
 
-Tested on:
-- Python 3.11
-- Node v22.14.0
-
 ## Description
 
 This project is a full-stack assessment application for Numida. The server, built in Python using Flask and GraphQL, manages loan and payment data. The web client, powered by Vite, React, and Tailwind CSS, provides an interactive UI to view existing loans and add new payments. The system demonstrates integration between REST endpoints and GraphQL queries to maintain updated front-end state. It also includes testing using Playwright & PyTest, comprehensive linting, and CI/CD integration ideas.
+
+## Tested on:
+- Python 3.11
+- Node v22.14.0
+
+## Demo
+
+[View Demo](./demo.mp4)
 
 ## Setup
 
@@ -17,6 +21,7 @@ This project is a full-stack assessment application for Numida. The server, buil
   ```
 
 ### Server
+#### Option 1: Run with Make
 1. Change directory to the server folder
   ```bash
     cd server
@@ -37,7 +42,12 @@ This project is a full-stack assessment application for Numida. The server, buil
   make run
   ```
 
-OR
+#### Option 2: Run with Docker
+
+1. Change directory to the server folder
+  ```bash
+    cd server
+  ```
 
 2. Build and run the server
   ```bash
@@ -57,13 +67,13 @@ OR
   npm install
   ```
 
-#### Development:
+#### Development Mode:
 1. Start the development server:
   ```bash
   npm run dev
   ```
 
-#### Production:
+#### Production Mode:
 1. Build the project for production:
   ```bash
   npm run build
@@ -74,64 +84,27 @@ OR
   npm run preview
   ```
 
-## Other commands
-### Server
+## Available commands
+### Server Commands
 
-1. Run tests to verify application behaviour:
-  ```bash
-  make test
-  ```
+| Command        | Description                                        |
+|---------------|----------------------------------------------------|
+| `make test`   | Run PyTest to verify application behavior.        |
+| `make lint`   | Run lint checks to enforce code style.            |
+| `make lint-fix` | Auto-fix linting issues.                         |
+| `make clean`  | Clean the virtual environment and remove cache files. |
+| `make help`   | Display a list of available Make commands.         |
 
-2. Run lint checks to enforce code style:
-  ```bash
-  make lint
-  ```
+### Web Client Commands
 
-3. Run lint fixes to enforce code style:
-  ```bash
-  make lint-fix
-  ```
-
-4. Clean the virtual environment and remove cache files:
-  ```bash
-  make clean
-  ```
-
-5. Display a list of available commands and their descriptions:
-  ```bash
-  make help
-  ```
-
-### Web Client
-1. Compile GraphQL code:
-  ```bash
-  npm run compile
-  ```
-
-2. Run lint checks:
-  ```bash
-  npm run lint
-  ```
-
-3. Automatically fix lint issues:
-  ```bash
-  npm run lint-fix
-  ```
-
-5. Run Playwright tests:
-  ```bash
-  npm run test
-  ```
-
-6. Run UI tests with Playwright Test UI:
-  ```bash
-  npm run test-ui
-  ```
-
-7. Show the test report:
-  ```bash
-  npm run test-report
-  ```
+| Command             | Description                                    |
+|---------------------|------------------------------------------------|
+| `npm run compile`   | Compile GraphQL code.                         |
+| `npm run lint`      | Run lint checks for TypeScript and SCSS.      |
+| `npm run lint-fix`  | Automatically fix lint issues.                |
+| `npm run test`      | Run Playwright tests.                         |
+| `npm run test-ui`   | Run UI tests using Playwright Test UI.        |
+| `npm run test-report` | Show Playwright test report.               |
 
 ## ToDo Items
 ### Server
@@ -142,6 +115,7 @@ OR
   - Improve file and module organization.
   - Implement pagination and filtering for large datasets.
   - Optimize query performance with proper indexing and caching.
+  - Use a Database.
 - **Testing & Logging:**
   - Expand integration and unit tests.
   - Enhance logging and error handling to aid in troubleshooting.
@@ -161,3 +135,4 @@ OR
   - Refactor the file structure for improved maintainability.
   - Improve unit test coverage across components.
   - Integrate additional performance metrics and error monitoring tools.
+  - Spin up a server service with curated mock data and reset it after every test.

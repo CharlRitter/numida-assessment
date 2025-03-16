@@ -25,7 +25,7 @@ export default function AddNewPayment(props: AddNewPaymentProps) {
     setIsSubmitting(true);
 
     try {
-      onAddPayment(loanId, paymentDate);
+      await onAddPayment(loanId, paymentDate);
       setLoanId('');
       setPaymentDate('');
     } catch {
@@ -39,7 +39,7 @@ export default function AddNewPayment(props: AddNewPaymentProps) {
     <div className="py-4">
       <div className="max-w-md mx-auto p-4 border border-gray-300 rounded shadow">
         {errorMessage && (
-          <div className="mb-4 text-center text-red-600 border border-red-400 bg-red-100 rounded p-2">
+          <div id="error-message" className="mb-4 text-center text-red-600 border border-red-400 bg-red-100 rounded p-2">
             {errorMessage}
           </div>
         )}

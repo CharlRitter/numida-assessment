@@ -1,6 +1,16 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const screenshotDir = path.join(__dirname, '../test-results');
 const devSite = 'http://localhost:5173/';
+
+if (!fs.existsSync(screenshotDir)) {
+  fs.mkdirSync(screenshotDir);
+}
 
 test.beforeEach(async ({ page }) => {
   // Navigate to your development site before each test
@@ -9,17 +19,29 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('End-to-End Payment Flow', () => {
   test('should add a new payment and refresh the loans table with updated payment date', async ({ page }) => {
+    // Intercept the API request and add a delay of 1 second.
+    await page.route('**/payments', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true })
+      });
+    });
+
     // Fill in the Add Payment form
     await page.fill('input[name="loan-id"]', '4');
     await page.fill('input[name="payment-date"]', '2025-04-30');
 
-    // Click the "Add Payment" button
-    const addButton = page.getByRole('button', { name: 'Add Payment' });
-    await addButton.click();
+    // Click the button and simultaneously wait for the spinner.
+    await Promise.all([
+      page.waitForSelector('#spinner', { state: 'visible', timeout: 5000 }),
+      page.waitForSelector('#spinner', { state: 'detached', timeout: 10000 }),
+      page.getByRole('button', { name: 'Add Payment' }).click()
+    ]);
 
-    // Wait for spinner to appear and then disappear
-    await page.waitForSelector('.spinner', { state: 'visible', timeout: 5000 });
-    await page.waitForSelector('.spinner', { state: 'detached', timeout: 10000 });
+    // Capture a screenshot of the final state.
+    await page.screenshot({ path: `${screenshotDir}/payment-added-screenshot.png` });
 
     // Verify that the loans table now includes a row with the updated payment date
     const paymentDateCell = page.locator('table tr', { hasText: '2025-04-30' });
@@ -27,31 +49,46 @@ test.describe('End-to-End Payment Flow', () => {
   });
 
   test('should display a spinner while submitting', async ({ page }) => {
-    // Fill in the form
+    // Intercept the API request and add a delay of 1 second.
+    await page.route('**/payments', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true })
+      });
+    });
+
+    // Fill in the form.
     await page.fill('input[name="loan-id"]', '12345');
     await page.fill('input[name="payment-date"]', '2025-04-30');
 
-    // Click the button and simultaneously wait for the spinner
+    // Click the button and simultaneously wait for the spinner.
     await Promise.all([
-      page.waitForSelector('.spinner', { state: 'visible', timeout: 5000 }),
+      page.waitForSelector('#spinner', { state: 'visible', timeout: 5000 }),
       page.getByRole('button', { name: 'Add Payment' }).click()
     ]);
 
-    // Confirm the spinner is visible
-    await expect(page.locator('.spinner')).toBeVisible();
+    // Capture the screenshot once the spinner is visible.
+    await page.screenshot({ path: `${screenshotDir}/spinner-visible-screenshot.png` });
+
+    await expect(page.locator('#spinner')).toBeVisible();
   });
 
   test('should show an error message when submission fails', async ({ page }) => {
-    // Force an error scenario. For example, leave the required fields empty.
+    // Force an error scenario.
     await page.fill('input[name="loan-id"]', 'HI');
     await page.fill('input[name="payment-date"]', '2025-04-30');
 
-    // Click the button. (Client side required validation may prevent submission,
-    // so you might need to simulate an API error if your form allows submission in test mode.)
+    // Click the button.
     await page.getByRole('button', { name: 'Add Payment' }).click();
 
-    // Check for the error message with our styled error container. Adjust the locator if needed.
-    const errorBox = page.locator('div', { hasText: 'Loan Id must be a valid Id number.' });
+    // Capture a screenshot for the error state.
+    await page.screenshot({ path: `${screenshotDir}/error-message-screenshot.png` });
+
+    // Check for the error message with our styled error container.
+    const errorBox = page.locator('#error-message');
     await expect(errorBox).toBeVisible();
+    await expect(errorBox).toContainText('Loan Id must be a valid Id number.');
   });
 });

@@ -9,6 +9,7 @@ on:
       - opened
       - synchronize
       - reopened
+
 jobs:
   test-frontend:
     name: Run Web Client Tests
@@ -24,13 +25,26 @@ jobs:
           node-version: 22.14.0
 
       - name: Install dependencies
-        run: cd web && npm install
+        run: npm install
+        working-directory: web
 
       - name: Install Playwright Browsers
         run: npm run playwright install --with-deps
+        working-directory: web
+
+      - name: Build web client
+        run: npm run build
+        working-directory: web
+
+      - name: Start web client
+        run: |
+          nohup npm run start &
+          npx wait-on http://localhost:5173
+        working-directory: web
 
       - name: Run Playwright tests
         run: npm run test
+        working-directory: web
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v3
@@ -40,8 +54,6 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Confirm web client builds
-        run: npm run build
   test-backend:
     name: Run Server tests
     timeout-minutes: 10
@@ -56,7 +68,11 @@ jobs:
           python-version: 3.11
 
       - name: Install dependencies
-        run: cd server && make venv && make install
+        run: |
+          make venv
+          make install
+        working-directory: server
 
       - name: Run tests
         run: make test
+        working-directory: server

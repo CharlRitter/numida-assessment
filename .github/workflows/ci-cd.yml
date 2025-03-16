@@ -29,7 +29,7 @@ jobs:
         working-directory: web
 
       - name: Install Playwright Browsers
-        run: npm run playwright install --with-deps
+        run: npx playwright install --with-deps
         working-directory: web
 
       - name: Build web client

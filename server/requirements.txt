@@ -16,7 +16,7 @@ MarkupSafe==3.0.2
 promise==2.3
 pytz==2024.1
 Rx==1.6.3
-six==1.16.0
+six==1.17.0
 Werkzeug==3.0.3
 zipp==3.19.2
 flake8
